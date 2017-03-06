@@ -29,17 +29,17 @@ Dependence Injection (Temporary work around)
 Then prepend ```var AST = require("./AST.js");``` to LET.js
 
 # Backus Naur Form Grammar
-*Program* :: *Expression*
+*Program*    :: *Expression*
 
 *Expression* :: Number
 
-             :: Id
+*Expression* :: Id
            
-             :: "zero?" "(" *Expression* ")"
+*Expression* :: "zero?" "(" *Expression* ")"
            
-             :: "-" "(" *Expression* "," *Expression* ")" 
+*Expression* :: "-" "(" *Expression* "," *Expression* ")" 
            
-             :: "let" Id "=" *Expression* "in" *Expression*
+*Expression* :: "let" Id "=" *Expression* "in" *Expression*
            
-             :: "if" *Expression* "then" *Expression* "else" *Expression*
+*Expression* :: "if" *Expression* "then" *Expression* "else" *Expression*
            
