@@ -13,7 +13,7 @@ var main = function(){
 
     console.log("Search for x: " + Env.applyEnv(env1, 'x'));
 }
-var Env = require("./Environment.js");
+var Env = require("../Environment.js");
 if(require.main === module) {
     main();
 }

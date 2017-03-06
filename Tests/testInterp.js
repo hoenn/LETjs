@@ -26,9 +26,9 @@ var main = function(){
     console.log(INTERP.valueOf(if1, env3));
 }
 
-var AST = require("./AST.js");
-var ENV = require("./Environment.js");
-var INTERP = require("./interp.js");
+var AST = require("../AST.js");
+var ENV = require("../Environment.js");
+var INTERP = require("../Interp.js");
 if(require.main === module) {
     main();
 }

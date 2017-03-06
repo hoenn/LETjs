@@ -1,5 +1,5 @@
 function Pgm(exp){
-    this.Exp = exp
+    this.Exp = exp;
 }
 function ConstExp(i)  {
     this.Int = i;
@@ -27,7 +27,7 @@ function LetExp (id, val, inExp) {
 }
 
 module.exports = {
-    Pgm: Pgm
+    Pgm: Pgm,
     ConstExp : ConstExp,
     VarExp : VarExp,
     IsZeroExp : IsZeroExp,
