@@ -1,5 +1,8 @@
 function valueOf (e, p) {
     switch(e.constructor){
+        case AST.Pgm:
+                return valueOf(Pgm.Exp);
+                break;
         case AST.ConstExp: 
                 return Number(e.Int);
                 break;
