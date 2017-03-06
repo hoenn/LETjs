@@ -3,6 +3,17 @@ LET is a programming language originally described in Scheme by Daniel P. Friedm
 
 This is an implementation of LET created in JavaScript using [jison](https://github.com/zaach/jison) to generate the parser.
 
+The LET language is a toy language with a very basic grammar. A program consists of a single expression which may be made up of multiple expressions itself. 
+
+####Examples of valid LET programs
+
+```let x = 5 in x``` Result: 5
+
+```let a = 3 in let y = 2 in -(x,y)``` Result: 1
+
+```let x = 3 in let y = 3 in if zero?(-(x,y)) then 1 else 0``` Result: 1
+
+
 ##Installation
 Clone the repository
 
