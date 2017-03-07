@@ -1,6 +1,20 @@
-##Implementation of Toy Language Let in JS using Jison
+#LETjs
+LET is a programming language originally described in Scheme by Daniel P. Friedman and Mitchell Wand in [*Exploration of Programming Languages*](https://mitpress.mit.edu/books/essentials-programming-languages).
 
-#Installation
+This is an implementation of LET created in JavaScript using [jison](https://github.com/zaach/jison) to generate the parser.
+
+The LET language is a toy language with a very basic grammar. A program consists of a single expression which may be made up of multiple expressions itself. 
+
+####Examples of valid LET programs
+
+```let x = 5 in x``` Result: 5
+
+```let a = 3 in let y = 2 in -(x,y)``` Result: 1
+
+```let x = 3 in let y = 3 in if zero?(-(x,y)) then 1 else 0``` Result: 1
+
+
+##Installation
 Clone the repository
 
 ```$ git clone https://github.com/Hoenn/LETjs.git```
@@ -9,7 +23,7 @@ Install dependencies (from within LETjs directory)
 
 ```$ npm install```
 
-#Usage guide
+##Usage guide
 Currently running the Parser with node is the easiest way to run LET language code
 
 Examples
@@ -18,7 +32,7 @@ Examples
 
 ```$ node Parser.js "let x = 3 in y = 2 in -(x,y)```
 
-#Recompilation
+##Recompilation
 The LET.jison and LET.jisonlex files are the backbone of the language. If modified they must be recompiled with Jison to generate a new LET.js file.
 
 To recompile LET.js
@@ -28,7 +42,7 @@ To recompile LET.js
 Dependence Injection (Temporary work around)
 Then prepend ```var AST = require("./AST.js");``` to LET.js
 
-# Backus Naur Form Grammar
+##Backus Naur Form Grammar
 *Program*    :: *Expression*
 
 *Expression* :: Number
