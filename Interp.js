@@ -4,16 +4,18 @@ function valueOf (e, p) {
                 return valueOf(e.Exp);
                 break;
         case AST.ConstExp: 
-                return Number(e.Int);
+                return new VAL.NumVal(e.Int);
                 break;
         case AST.VarExp:
                 return ENV.applyEnv(p, e.Id);
                 break;
         case AST.IsZeroExp:
-                return valueOf(e.Exp, p) == 0;
+                return new VAL.BoolVal(valueOf(e.Exp, p) == 0);
                 break;
         case AST.DiffExp: 
-                return valueOf(e.Exp1, p) - valueOf(e.Exp2, p);
+                var n1 = new VAL.NumVal(valueOf(e.Exp1,p));
+                var n2 = new VAL.NumVal(valueOf(e.Exp2, p));
+                return new VAL.NumVal(n1 - n2);
                 break;
         case AST.LetExp:
                 var body = e.Exp2;
@@ -22,7 +24,8 @@ function valueOf (e, p) {
                 return valueOf(body, pp);
                 break;
         case AST.IfExp: 
-                if (valueOf(e.Exp1, p) == true){
+                var test = new VAL.BoolVal(valueOf(e.Exp1, p));
+                if (test.val == true){
                     return valueOf(e.Exp2, p);
                 } else {
                     return valueOf(e.Exp3, p);
@@ -35,3 +38,4 @@ module.exports = {
 }
 AST = require("./AST.js");
 ENV = require("./Environment.js");
+VAL = require("./Val.js");
