@@ -73,12 +73,12 @@ var AST = require("./AST.js");
   }
 */
 var LET = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,3],$V1=[1,4],$V2=[1,5],$V3=[1,6],$V4=[1,7],$V5=[1,8],$V6=[5,10,12,14,15,18];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,3],$V1=[1,4],$V2=[1,5],$V3=[1,6],$V4=[1,7],$V5=[1,8],$V6=[5,12,14,16,17,20];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"e":4,"EOF":5,"NUMBER":6,"ID":7,"ZERO":8,"LPAREN":9,"RPAREN":10,"MINUS":11,"COMMA":12,"IF":13,"THEN":14,"ELSE":15,"LET":16,"ASSIGN":17,"IN":18,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",6:"NUMBER",7:"ID",8:"ZERO",9:"LPAREN",10:"RPAREN",11:"MINUS",12:"COMMA",13:"IF",14:"THEN",15:"ELSE",16:"LET",17:"ASSIGN",18:"IN"},
-productions_: [0,[3,2],[4,1],[4,1],[4,4],[4,6],[4,6],[4,6]],
+symbols_: {"error":2,"expressions":3,"e":4,"EOF":5,"pgm":6,"PGM":7,"NUMBER":8,"ID":9,"ZERO":10,"LPAREN":11,"RPAREN":12,"MINUS":13,"COMMA":14,"IF":15,"THEN":16,"ELSE":17,"LET":18,"ASSIGN":19,"IN":20,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",7:"PGM",8:"NUMBER",9:"ID",10:"ZERO",11:"LPAREN",12:"RPAREN",13:"MINUS",14:"COMMA",15:"IF",16:"THEN",17:"ELSE",18:"LET",19:"ASSIGN",20:"IN"},
+productions_: [0,[3,2],[6,2],[4,1],[4,1],[4,4],[4,6],[4,6],[4,6]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -89,26 +89,29 @@ case 1:
           return $$[$0-1]; 
 break;
 case 2:
-this.$ = new AST.ConstExp(Number($$[$0]));
+this.$ = new AST.Pgm($$[$0-1]);
 break;
 case 3:
-this.$ = new AST.VarExp($$[$0]);
+this.$ = new AST.ConstExp(Number($$[$0]));
 break;
 case 4:
-this.$ = new AST.IsZeroExp($$[$0-1]);
+this.$ = new AST.VarExp($$[$0]);
 break;
 case 5:
-this.$ = new AST.DiffExp($$[$0-3], $$[$0-1]);
+this.$ = new AST.IsZeroExp($$[$0-1]);
 break;
 case 6:
-this.$ = new AST.IfExp($$[$0-4], $$[$0-2], $$[$0]);
+this.$ = new AST.DiffExp($$[$0-3], $$[$0-1]);
 break;
 case 7:
+this.$ = new AST.IfExp($$[$0-4], $$[$0-2], $$[$0]);
+break;
+case 8:
 this.$ = new AST.LetExp($$[$0-4], $$[$0-2], $$[$0]);
 break;
 }
 },
-table: [{3:1,4:2,6:$V0,7:$V1,8:$V2,11:$V3,13:$V4,16:$V5},{1:[3]},{5:[1,9]},o($V6,[2,2]),o($V6,[2,3]),{9:[1,10]},{9:[1,11]},{4:12,6:$V0,7:$V1,8:$V2,11:$V3,13:$V4,16:$V5},{7:[1,13]},{1:[2,1]},{4:14,6:$V0,7:$V1,8:$V2,11:$V3,13:$V4,16:$V5},{4:15,6:$V0,7:$V1,8:$V2,11:$V3,13:$V4,16:$V5},{14:[1,16]},{17:[1,17]},{10:[1,18]},{12:[1,19]},{4:20,6:$V0,7:$V1,8:$V2,11:$V3,13:$V4,16:$V5},{4:21,6:$V0,7:$V1,8:$V2,11:$V3,13:$V4,16:$V5},o($V6,[2,4]),{4:22,6:$V0,7:$V1,8:$V2,11:$V3,13:$V4,16:$V5},{15:[1,23]},{18:[1,24]},{10:[1,25]},{4:26,6:$V0,7:$V1,8:$V2,11:$V3,13:$V4,16:$V5},{4:27,6:$V0,7:$V1,8:$V2,11:$V3,13:$V4,16:$V5},o($V6,[2,5]),o($V6,[2,6]),o($V6,[2,7])],
+table: [{3:1,4:2,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{1:[3]},{5:[1,9]},o($V6,[2,3]),o($V6,[2,4]),{11:[1,10]},{11:[1,11]},{4:12,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{9:[1,13]},{1:[2,1]},{4:14,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{4:15,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{16:[1,16]},{19:[1,17]},{12:[1,18]},{14:[1,19]},{4:20,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{4:21,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},o($V6,[2,5]),{4:22,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{17:[1,23]},{20:[1,24]},{12:[1,25]},{4:26,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{4:27,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},o($V6,[2,6]),o($V6,[2,7]),o($V6,[2,8])],
 defaultActions: {9:[2,1]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
@@ -590,31 +593,31 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
-case 1:return 16
+case 1:return 18
 break;
-case 2:return 18
+case 2:return 20
 break;
-case 3:return 13
+case 3:return 15
 break;
-case 4:return 14
+case 4:return 16
 break;
-case 5:return 15
+case 5:return 17
 break;
-case 6:return 17
+case 6:return 19
 break;
-case 7:return 8
+case 7:return 10
 break;
-case 8:return 11
+case 8:return 13
 break;
-case 9:return 9
+case 9:return 11
 break;
-case 10:return 10
+case 10:return 12
 break;
-case 11:return 12
+case 11:return 14
 break;
-case 12:return 6
+case 12:return 8
 break;
-case 13:return 7
+case 13:return 9
 break;
 case 14:return 5
 break;

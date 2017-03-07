@@ -7,7 +7,9 @@ var main = function(){
     var output = parser.parse(process.argv[2]);
     //Output
     var emptyEnv = new ENV.Env(null,null,null)
-    console.log(INTERP.valueOf(output));
+    var pgm = new AST.Pgm(output);
+    console.log(pgm)
+    console.log(INTERP.valueOf(pgm, emptyEnv));
 }
 
 

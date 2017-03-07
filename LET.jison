@@ -7,7 +7,11 @@ expressions
         { //typeof console !== 'undefined' ? console.log($1) : print($1);
           return $1; }
     ;
-
+pgm 
+    : e PGM
+        {$$ = new AST.Pgm($1);}
+    ;
+    
 e
     : NUMBER
         {$$ = new AST.ConstExp(Number($1));}
