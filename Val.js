@@ -5,7 +5,11 @@ var ExpVal = function(){
 }
 
 var NumVal = function(val){
-    this.val = parseInt(val);
+    var test = parseInt(val);
+    if(!isNaN(test)) //Is a number
+        this.val = parseInt(val);
+    else
+        throw new Error("Cannot create NumVal of NaN");
 }
 NumVal.prototype = Object.create(ExpVal.prototype);
 NumVal.prototype.constructor= NumVal;
@@ -14,7 +18,10 @@ NumVal.prototype.show = function NumValShow(){
 }
 
 var BoolVal = function(bool){
-    this.val = bool
+    if(typeof bool == 'boolean')
+        this.val = bool
+    else
+        throw new Error("Cannot create BoolVal of non boolean");
 }
 BoolVal.prototype = Object.create(ExpVal.prototype);
 BoolVal.prototype.constructor = BoolVal
@@ -28,4 +35,3 @@ module.exports = {
     NumVal: NumVal,
     BoolVal: BoolVal
 };
-
