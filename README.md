@@ -25,13 +25,17 @@ Install dependencies (from within LETjs directory)
 
 ##Usage guide
 The LET language can be interpreted using Repl.js. To launch the REPL
+
 ```$ node Repl.js```
 
 Using the REPL
+
 ```LET> 5```
+
 ```LET> let x = 5 in x```
 
 To see the Abstract Syntax Tree of your programs the REPL can be launched with  'AST' as an argument.
+
 ```$ node Repl.js AST```
 
 
