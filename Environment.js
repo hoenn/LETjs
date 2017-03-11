@@ -4,6 +4,9 @@ function Env(i, v, e){
     this.val = v;
     this.savedEnv = e;
 }
+function emptyEnv(){
+    return new Env(null,null,null);
+}
 function isEmpty(e){
     return typeof e === "undefined"
 }
@@ -26,6 +29,7 @@ function applyEnv(e, i){
 
 module.exports = {
     Env: Env,
+    emptyEnv: emptyEnv,
     isEmpty: isEmpty,
     extendEnv: extendEnv,
     applyEnv: applyEnv
