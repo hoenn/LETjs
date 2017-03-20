@@ -17,6 +17,16 @@ function valueOf (e, p) {
                 var n2 =valueOf(e.Exp2, p);
                 return new VAL.NumVal(n1.val - n2.val);
                 break;
+        case AST.PlusExp: 
+                var n1 =valueOf(e.Exp1,p);
+                var n2 =valueOf(e.Exp2, p);
+                return new VAL.NumVal(n1.val + n2.val);
+                break;
+        case AST.TimesExp: 
+                var n1 =valueOf(e.Exp1,p);
+                var n2 =valueOf(e.Exp2, p);
+                return new VAL.NumVal(n1.val * n2.val);
+                break;
         case AST.LetExp:
                 var body = e.Exp2;
                 var v = valueOf(e.Exp1, p);

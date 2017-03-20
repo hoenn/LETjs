@@ -15,6 +15,8 @@
 "zero?"               return 'ZERO'
 "-"?[0-9]+            return 'NUMBER'
 "-"                   return 'MINUS'
+"+"                   return 'PLUS'
+"*"                   return 'TIMES'
 "("                   return 'LPAREN'
 ")"                   return 'RPAREN'
 ","                   return 'COMMA'

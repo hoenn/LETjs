@@ -72,12 +72,12 @@
   }
 */
 var LET = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,3],$V1=[1,4],$V2=[1,5],$V3=[1,6],$V4=[1,7],$V5=[1,8],$V6=[5,12,14,16,17,20];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,3],$V1=[1,4],$V2=[1,5],$V3=[1,6],$V4=[1,7],$V5=[1,8],$V6=[1,9],$V7=[1,10],$V8=[5,12,14,18,19,22];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"e":4,"EOF":5,"pgm":6,"PGM":7,"NUMBER":8,"ID":9,"ZERO":10,"LPAREN":11,"RPAREN":12,"MINUS":13,"COMMA":14,"IF":15,"THEN":16,"ELSE":17,"LET":18,"ASSIGN":19,"IN":20,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",7:"PGM",8:"NUMBER",9:"ID",10:"ZERO",11:"LPAREN",12:"RPAREN",13:"MINUS",14:"COMMA",15:"IF",16:"THEN",17:"ELSE",18:"LET",19:"ASSIGN",20:"IN"},
-productions_: [0,[3,2],[6,2],[4,1],[4,1],[4,4],[4,6],[4,6],[4,6]],
+symbols_: {"error":2,"expressions":3,"e":4,"EOF":5,"pgm":6,"PGM":7,"NUMBER":8,"ID":9,"ZERO":10,"LPAREN":11,"RPAREN":12,"MINUS":13,"COMMA":14,"PLUS":15,"TIMES":16,"IF":17,"THEN":18,"ELSE":19,"LET":20,"ASSIGN":21,"IN":22,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",7:"PGM",8:"NUMBER",9:"ID",10:"ZERO",11:"LPAREN",12:"RPAREN",13:"MINUS",14:"COMMA",15:"PLUS",16:"TIMES",17:"IF",18:"THEN",19:"ELSE",20:"LET",21:"ASSIGN",22:"IN"},
+productions_: [0,[3,2],[6,2],[4,1],[4,1],[4,4],[4,6],[4,6],[4,6],[4,6],[4,6]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -103,15 +103,21 @@ case 6:
 this.$ = new AST.DiffExp($$[$0-3], $$[$0-1]);
 break;
 case 7:
-this.$ = new AST.IfExp($$[$0-4], $$[$0-2], $$[$0]);
+this.$ = new AST.PlusExp($$[$0-3], $$[$0-1]);
 break;
 case 8:
+this.$ = new AST.TimesExp($$[$0-3], $$[$0-1]);
+break;
+case 9:
+this.$ = new AST.IfExp($$[$0-4], $$[$0-2], $$[$0]);
+break;
+case 10:
 this.$ = new AST.LetExp($$[$0-4], $$[$0-2], $$[$0]);
 break;
 }
 },
-table: [{3:1,4:2,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{1:[3]},{5:[1,9]},o($V6,[2,3]),o($V6,[2,4]),{11:[1,10]},{11:[1,11]},{4:12,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{9:[1,13]},{1:[2,1]},{4:14,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{4:15,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{16:[1,16]},{19:[1,17]},{12:[1,18]},{14:[1,19]},{4:20,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{4:21,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},o($V6,[2,5]),{4:22,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{17:[1,23]},{20:[1,24]},{12:[1,25]},{4:26,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},{4:27,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,18:$V5},o($V6,[2,6]),o($V6,[2,7]),o($V6,[2,8])],
-defaultActions: {9:[2,1]},
+table: [{3:1,4:2,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{1:[3]},{5:[1,11]},o($V8,[2,3]),o($V8,[2,4]),{11:[1,12]},{11:[1,13]},{11:[1,14]},{11:[1,15]},{4:16,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{9:[1,17]},{1:[2,1]},{4:18,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{4:19,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{4:20,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{4:21,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{18:[1,22]},{21:[1,23]},{12:[1,24]},{14:[1,25]},{14:[1,26]},{14:[1,27]},{4:28,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{4:29,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},o($V8,[2,5]),{4:30,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{4:31,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{4:32,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{19:[1,33]},{22:[1,34]},{12:[1,35]},{12:[1,36]},{12:[1,37]},{4:38,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},{4:39,8:$V0,9:$V1,10:$V2,13:$V3,15:$V4,16:$V5,17:$V6,20:$V7},o($V8,[2,6]),o($V8,[2,7]),o($V8,[2,8]),o($V8,[2,9]),o($V8,[2,10])],
+defaultActions: {11:[2,1]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -592,17 +598,17 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
-case 1:return 18
+case 1:return 20
 break;
-case 2:return 20
+case 2:return 22
 break;
-case 3:return 15
+case 3:return 17
 break;
-case 4:return 16
+case 4:return 18
 break;
-case 5:return 17
+case 5:return 19
 break;
-case 6:return 19
+case 6:return 21
 break;
 case 7:return 10
 break;
@@ -610,20 +616,24 @@ case 8:return 8
 break;
 case 9:return 13
 break;
-case 10:return 11
+case 10:return 15
 break;
-case 11:return 12
+case 11:return 16
 break;
-case 12:return 14
+case 12:return 11
 break;
-case 13:return 9
+case 13:return 12
 break;
-case 14:return 5
+case 14:return 14
+break;
+case 15:return 9
+break;
+case 16:return 5
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:let\b)/,/^(?:in\b)/,/^(?:if\b)/,/^(?:then\b)/,/^(?:else\b)/,/^(?:=)/,/^(?:zero\?)/,/^(?:-?[0-9]+)/,/^(?:-)/,/^(?:\()/,/^(?:\))/,/^(?:,)/,/^(?:[a-zA-Z][a-zA-Z0-9\_\-\?\']*)/,/^(?:$)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:let\b)/,/^(?:in\b)/,/^(?:if\b)/,/^(?:then\b)/,/^(?:else\b)/,/^(?:=)/,/^(?:zero\?)/,/^(?:-?[0-9]+)/,/^(?:-)/,/^(?:\+)/,/^(?:\*)/,/^(?:\()/,/^(?:\))/,/^(?:,)/,/^(?:[a-zA-Z][a-zA-Z0-9\_\-\?\']*)/,/^(?:$)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],"inclusive":true}}
 });
 return lexer;
 })();

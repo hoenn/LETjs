@@ -21,6 +21,10 @@ e
        {$$ = new AST.IsZeroExp($3);}
     | MINUS LPAREN e COMMA e RPAREN
        {$$ = new AST.DiffExp($3, $5);}
+    | PLUS LPAREN e COMMA e RPAREN
+       {$$ = new AST.PlusExp($3, $5);}
+    | TIMES LPAREN e COMMA e RPAREN
+       {$$ = new AST.TimesExp($3, $5);}
     | IF e THEN e ELSE e
         {$$ = new AST.IfExp($2, $4, $6);}
     | LET ID ASSIGN e IN e
