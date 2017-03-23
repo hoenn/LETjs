@@ -56,8 +56,8 @@ function valueOf (e, p) {
                 var bvar = e.Id2;
                 var pbody = e.Exp1;
                 var body = e.Exp2;
-                var wrappedProc = new VAL.ProcVal(new Proc.RecProc(bVar,pbody));
-                var pp = Env.extendEnv(p, pname, wrappedProc);
+                var wrappedProc = new VAL.ProcVal(new PROC.RecProc(bvar,pbody));
+                var pp = ENV.extendEnv(p, pname, wrappedProc);
                 return valueOf(body, pp);
                 break;
     }
