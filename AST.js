@@ -27,11 +27,24 @@ function IfExp (cond, cons, alt)  {
     this.Exp2 = cons; //Consequent
     this.Exp3 = alt;  //Alternative
 }
-//id is a strng not an expression
 function LetExp (id, val, inExp) {
     this.Id = id;
     this.Exp1 = val
     this.Exp2 = inExp
+}
+function ProcExp (id, exp){
+    this.Param = id;
+    this.Exp = exp;
+}
+function CallExp (exp1, exp2){
+    this.Exp1 = exp1;
+    this.Exp2 = exp2;
+}
+function LetRecExp (id1, id2, exp1, exp2){
+    this.Id1 = id1;
+    this.Id2 = id2;
+    this.Exp1 = exp1;
+    this.Exp2 = exp2;
 }
 
 module.exports = {
@@ -43,5 +56,9 @@ module.exports = {
     PlusExp : PlusExp,
     TimesExp : TimesExp,
     IfExp : IfExp,
-    LetExp : LetExp
+    LetExp : LetExp,
+    ProcExp: ProcExp,
+    CallExp: CallExp,
+    LetRecExp: LetRecExp
+
 }
