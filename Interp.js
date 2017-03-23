@@ -41,7 +41,32 @@ function valueOf (e, p) {
                     return valueOf(e.Exp3, p);
                 }
                 break;
+        case AST.ProcExp:
+                return new VAL.ProcVal(new PROC.Proc(e.Param, e.Exp, p));
+                break;
+        case AST.CallExp:
+                var rator = e.Exp1;
+                var rand = e.Exp2;
+                var proc = valueOf(rator, p);
+                var arg = valueOf(rand, p);
+                return applyProcedure(proc, arg);
+                break;
+        case AST.LetRecExp:
+                var pname = e.Id1;
+                var bvar = e.Id2;
+                var pbody = e.Exp1;
+                var body = e.Exp2;
+                var wrappedProc = new VAL.ProcVal(new Proc.RecProc(bVar,pbody));
+                var pp = Env.extendEnv(p, pname, wrappedProc);
+                return valueOf(body, pp);
+                break;
     }
+}
+function applyProcedure(proc, arg){
+    var param = proc.val.Param;
+    var body = proc.val.Exp;
+    var savedEnv = proc.val.Env;
+    return valueOf(body, (ENV.extendEnv(savedEnv, param, arg)));
 }
 module.exports = {
     valueOf: valueOf
@@ -49,3 +74,4 @@ module.exports = {
 AST = require("./AST.js");
 ENV = require("./Environment.js");
 VAL = require("./Val.js");
+PROC = require("./Closure.js");
