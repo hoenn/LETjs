@@ -24,14 +24,23 @@ var BoolVal = function(bool){
         throw new Error("Cannot create BoolVal of non boolean");
 }
 BoolVal.prototype = Object.create(ExpVal.prototype);
-BoolVal.prototype.constructor = BoolVal
+BoolVal.prototype.constructor = BoolVal;
 BoolVal.prototype.show = function BoolValShow(){
     return this.val;
 }
 
+var ProcVal = function(proc){
+    this.val = proc
+}
+ProcVal.prototype = Object.create(ExpVal.prototype);
+ProcVal.prototype.constructor = ProcVal;
+ProcVal.prototype.show = function ProcValShow(){
+    return this.val;
+}
 
 module.exports = {
     ExpVal: ExpVal,
     NumVal: NumVal,
-    BoolVal: BoolVal
+    BoolVal: BoolVal,
+    ProcVal: ProcVal
 };
