@@ -19,13 +19,25 @@ function applyEnv(e, i){
         return "Not found"
     }
     else if(e.id == i){
-        return e.val;
+        return expand(e, e.val);
     }
     else{
         return applyEnv(e.savedEnv, i);
     }
 }
-
+function expand(e, v){
+    //If the value is a proc val that contains a recursive proc
+    if(v.constructor == VAL.ProcVal && v.val.constructor = PROC.RecProc){
+        var param = v.val.Param;
+        var body = v.val.Exp;
+        return new VAL.ProcVal(new PROC.Proc(param, body, e));
+    }
+    else {
+        return v;
+    }
+}
+var VAL = require('./Val.js');
+var PROC = require('./Closure.js');
 
 module.exports = {
     Env: Env,
