@@ -11,6 +11,10 @@ var main = function(){
     repl.prompt();
 
     repl.on('line', (line) => {
+        //If input matches a quit value
+        if(quitValues.indexOf(line) != -1){
+            repl.close();
+        }
         try {
             var pgm = new AST.Pgm(parser.parse(line));
             if(showAST)
@@ -30,6 +34,12 @@ var main = function(){
         process.exit(0);
     });
 }
+var quitValues = [
+    ":q",
+    "quit",
+    "close",
+    "exit"
+];
 
 var AST = require("./AST.js");
 var replEnv = require("./Environment.js").emptyEnv();
