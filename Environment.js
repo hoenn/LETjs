@@ -27,7 +27,7 @@ function applyEnv(e, i){
 }
 function expand(e, v){
     //If the value is a proc val that contains a recursive proc
-    if(v.constructor == VAL.ProcVal && v.val.constructor = PROC.RecProc){
+    if(v.constructor == VAL.ProcVal && v.val.constructor == PROC.RecProc){
         var param = v.val.Param;
         var body = v.val.Exp;
         return new VAL.ProcVal(new PROC.Proc(param, body, e));
