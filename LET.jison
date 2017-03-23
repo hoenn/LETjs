@@ -29,5 +29,12 @@ e
         {$$ = new AST.IfExp($2, $4, $6);}
     | LET ID ASSIGN e IN e
         {$$ = new AST.LetExp($2, $4, $6);}
+    | PROC LPAREN ID RPAREN e
+        {$$ = new AST.ProcExp($3, $5);}
+    | LPAREN e e RPAREN
+        {$$ = new AST.CallExp($2, $3);}
+    | LETREC ID LPAREN ID RPAREN ASSIGN e IN e
+        {$$ = new AST.LetRecExp($2, $4, $7, $9);}
+
     ;
 
