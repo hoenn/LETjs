@@ -58,7 +58,16 @@ To recompile LET.js
            
 *Expression* :: "-" "(" *Expression* "," *Expression* ")" 
            
+*Expression* :: "+" "(" *Expression* "," *Expression* ")" 
+
+*Expression* :: "*" "(" *Expression* "," *Expression* ")" 
+
 *Expression* :: "let" Id "=" *Expression* "in" *Expression*
            
 *Expression* :: "if" *Expression* "then" *Expression* "else" *Expression*
+
+*Expression* :: "proc" "(" Id ")" *Expression*
+
+*Expression* :: "(" *Expression* " " *Expression* ")"
            
+*Expression* :: "letrec" Id "(" Id ")" "=" *Expression* "in" *Expression*
