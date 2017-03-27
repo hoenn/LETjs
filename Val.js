@@ -38,9 +38,19 @@ ProcVal.prototype.show = function ProcValShow(){
     return this.val;
 }
 
+var RefVal = function(ref){
+    this.val = ref
+}
+RefVal.prototype = Object.create(ExpVal.prototype);
+RefVal.prototype.constructor = RefVal;
+RefVal.prototype.show = function RefValShow(){
+    return this.val;
+}
+
 module.exports = {
     ExpVal: ExpVal,
     NumVal: NumVal,
     BoolVal: BoolVal,
-    ProcVal: ProcVal
+    ProcVal: ProcVal,
+    RefVal: RefVal
 };
