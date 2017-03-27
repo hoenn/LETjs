@@ -11,6 +11,8 @@ var main = function(){
     repl.prompt();
 
     repl.on('line', (line) => {
+        //Clear store
+        var replSto = new STO.Store();
         //If input matches a quit value
         if(quitValues.indexOf(line) != -1){
             repl.close();

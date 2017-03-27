@@ -33,9 +33,12 @@ function valueOf (e, p, s) {
                 
                 break;
         case AST.PlusExp: //TO DO 
-                var n1 =valueOf(e.Exp1,p);
-                var n2 =valueOf(e.Exp2, p);
-                return new VAL.NumVal(n1.val + n2.val);
+                var ans1 =valueOf(e.Exp1,p, s);
+                var ans2  =valueOf(e.Exp2, p, ans1.sto);
+                return {
+                        "val": new VAL.NumVal(ans1.val.val + ans2.val.val),
+                        "sto": ans2.sto
+                       }
                 break;
         case AST.TimesExp: //TO DO
                 var n1 =valueOf(e.Exp1,p);
@@ -88,7 +91,7 @@ function valueOf (e, p, s) {
                 break;
         case AST.DerefExp:
                 var ans = valueOf(e.Exp1, p, s);
-                var addr = ans.val;
+                var addr = ans.val.val;
                 var value = STO.deref(addr, ans.sto);
                 return {
                     "val": value,
@@ -98,9 +101,10 @@ function valueOf (e, p, s) {
         case AST.SetRefExp:
                 var ans1 = valueOf(e.Exp1, p, s);
                 var ans2 = valueOf(e.Exp2, p, ans1.sto);
-                var addr = STO.setRef(ans1.val, ans2.val, ans2.sto);
+                var oldVal = STO.deref(ans1.val.val, s);
+                var addr = STO.setRef(ans1.val.val, ans2.val, ans2.sto);
                 return {
-                    "val": "42",
+                    "val": oldVal,
                     "sto": addr
                 }
                 break
