@@ -19,7 +19,7 @@ var main = function(){
             var pgm = new AST.Pgm(parser.parse(line));
             if(showAST)
                 console.log(pgm);
-            console.log(INTERP.valueOf(pgm, replEnv));
+            console.log(INTERP.valueOf(pgm, replEnv, replSto));
         } 
         catch(e){
             console.log("Invalid Syntax");
@@ -43,6 +43,7 @@ var quitValues = [
 
 var AST = require("./AST.js");
 var replEnv = require("./Environment.js").emptyEnv();
+var replSto = new require("./Store.js").Store();
 var INTERP = require("./Interp.js");
 var parser = require("./LET.js").parser;
 var showAST = false;
