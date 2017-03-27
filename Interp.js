@@ -1,57 +1,75 @@
-function valueOf (e, p) {
+function valueOf (e, p, s) {
     switch(e.constructor){
         case AST.Pgm:
-                return valueOf(e.Exp);
+                return (valueOf(e.Exp, p, s)).val;
                 break;
         case AST.ConstExp: 
-                return new VAL.NumVal(e.Int);
+                return {
+                       "val": new VAL.NumVal(e.Int),
+                       "sto": s
+                    }
                 break;
         case AST.VarExp:
-                return ENV.applyEnv(p, e.Id);
+                return {
+                        "val": ENV.applyEnv(p, e.Id),
+                        "sto": s
+                        }
                 break;
         case AST.IsZeroExp:
-                return new VAL.BoolVal(valueOf(e.Exp, p).val == 0);
+                var answer = valueOf(e.Exp, p, s)
+
+                return {
+                        "val" : new VAL.BoolVal(answer.val == 0),
+                        "sto": answer.sto
+                       }
                 break;
         case AST.DiffExp: 
-                var n1 =valueOf(e.Exp1,p);
-                var n2 =valueOf(e.Exp2, p);
-                return new VAL.NumVal(n1.val - n2.val);
+                var ans1 =valueOf(e.Exp1,p, s);
+                var ans2 =valueOf(e.Exp2, p, ans1.sto);
+                return {
+                        "val": new VAL.NumVal(ans1.val.val - ans2.val.val),
+                        "sto": ans2.sto
+                        }
+                
                 break;
-        case AST.PlusExp: 
+        case AST.PlusExp: //TO DO 
                 var n1 =valueOf(e.Exp1,p);
                 var n2 =valueOf(e.Exp2, p);
                 return new VAL.NumVal(n1.val + n2.val);
                 break;
-        case AST.TimesExp: 
+        case AST.TimesExp: //TO DO
                 var n1 =valueOf(e.Exp1,p);
                 var n2 =valueOf(e.Exp2, p);
                 return new VAL.NumVal(n1.val * n2.val);
                 break;
         case AST.LetExp:
                 var body = e.Exp2;
-                var v = valueOf(e.Exp1, p);
-                var pp = ENV.extendEnv(p, e.Id, v);
-                return valueOf(body, pp);
+                var ans = valueOf(e.Exp1, p, s);
+                var pp = ENV.extendEnv(p, e.Id, ans.val);
+                return valueOf(body, pp, ans.sto);
                 break;
         case AST.IfExp: 
-                var test = valueOf(e.Exp1, p);
-                if (test.val == true){
-                    return valueOf(e.Exp2, p);
+                var ans = valueOf(e.Exp1, p, s);
+                if (ans.val.val == true){
+                    return valueOf(e.Exp2, p, ans.sto);
                 } else {
-                    return valueOf(e.Exp3, p);
+                    return valueOf(e.Exp3, p, ans.sto);
                 }
                 break;
         case AST.ProcExp:
-                return new VAL.ProcVal(new PROC.Proc(e.Param, e.Exp, p));
+                return {
+                    "val": new VAL.ProcVal(new PROC.Proc(e.Param, e.Exp, p)),
+                    "sto": s
+                    }
                 break;
-        case AST.CallExp:
+        case AST.CallExp: //TO DO 
                 var rator = e.Exp1;
                 var rand = e.Exp2;
                 var proc = valueOf(rator, p);
                 var arg = valueOf(rand, p);
                 return applyProcedure(proc, arg);
                 break;
-        case AST.LetRecExp:
+        case AST.LetRecExp: //TO DO
                 var pname = e.Id1;
                 var bvar = e.Id2;
                 var pbody = e.Exp1;
@@ -60,6 +78,32 @@ function valueOf (e, p) {
                 var pp = ENV.extendEnv(p, pname, wrappedProc);
                 return valueOf(body, pp);
                 break;
+        case AST.NewRefExp:
+                var ans = valueOf(e.Exp1, p, s);
+                var ref = STO.newRef(ans.val, ans.sto);
+                return {
+                    "val": ref.addr,
+                    "sto": ref.sto
+                }
+                break;
+        case AST.DerefExp:
+                var ans = valueOf(e.Exp1, p, s);
+                var addr = ans.val;
+                var value = STO.deref(addr, ans.sto);
+                return {
+                    "val": value,
+                    "sto": ans.sto
+                }
+                break;
+        case AST.SetRefExp:
+                var ans1 = valueOf(e.Exp1, p, s);
+                var ans2 = valueOf(e.Exp2, p, ans1.sto);
+                var addr = setref(ans1.val, ans2.val, ans2.sto);
+                return {
+                    "val": "42",
+                    "sto": addr
+                }
+                break
     }
 }
 function applyProcedure(proc, arg){
@@ -75,3 +119,4 @@ AST = require("./AST.js");
 ENV = require("./Environment.js");
 VAL = require("./Val.js");
 PROC = require("./Closure.js");
+STO = require("./Store.js");

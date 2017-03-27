@@ -5,7 +5,7 @@ function newRef(val, store){
     var index = store.list.length;
     store.list.push(val); 
     return {
-        "ref":index,
+        "addr":index,
         "sto":store
     };
 }
