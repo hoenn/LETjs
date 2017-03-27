@@ -46,6 +46,16 @@ function LetRecExp (id1, id2, exp1, exp2){
     this.Exp1 = exp1;
     this.Exp2 = exp2;
 }
+function NewRefExp(exp1){
+    this.Exp1 = exp1;
+}
+function DerefExp(exp1){
+    this.Exp1 = exp1;
+}
+function SetRefExp(exp1, exp2){
+    this.Exp1 = exp1;
+    this.Exp2 = exp2;
+}
 
 module.exports = {
     Pgm: Pgm,
@@ -59,6 +69,9 @@ module.exports = {
     LetExp : LetExp,
     ProcExp: ProcExp,
     CallExp: CallExp,
-    LetRecExp: LetRecExp
+    LetRecExp: LetRecExp,
+    NewRefExp: NewRefExp,
+    DerefExp: DerefExp,
+    SetRefExp: SetRefExp
 
 }
