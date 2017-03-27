@@ -35,6 +35,12 @@ e
         {$$ = new AST.CallExp($2, $3);}
     | LETREC ID LPAREN ID RPAREN ASSIGN e IN e
         {$$ = new AST.LetRecExp($2, $4, $7, $9);}
+    | NEWREF LPAREN e RPAREN
+        {$$ = new AST.NewRefExp($3);}
+    | DEREF LPAREN e RPAREN
+        {$$ = new AST.DerefExp($3);}
+    | SETREF LPAREN e COMMA e RPAREN
+        {$$ = new AST.SetRefExp($3, $5);}
 
     ;
 
