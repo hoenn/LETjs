@@ -22,6 +22,7 @@ var main = function(){
             console.log(INTERP.valueOf(pgm, replEnv, replSto));
         } 
         catch(e){
+            console.log(e);
             console.log("Invalid Syntax");
         }
         finally{
@@ -43,7 +44,8 @@ var quitValues = [
 
 var AST = require("./AST.js");
 var replEnv = require("./Environment.js").emptyEnv();
-var replSto = new require("./Store.js").Store();
+var STO = require("./Store.js");
+var replSto = new STO.Store();
 var INTERP = require("./Interp.js");
 var parser = require("./LET.js").parser;
 var showAST = false;

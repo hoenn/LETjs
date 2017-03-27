@@ -82,7 +82,7 @@ function valueOf (e, p, s) {
                 var ans = valueOf(e.Exp1, p, s);
                 var ref = STO.newRef(ans.val, ans.sto);
                 return {
-                    "val": ref.addr,
+                    "val": new VAL.RefVal(ref.addr),
                     "sto": ref.sto
                 }
                 break;
@@ -98,7 +98,7 @@ function valueOf (e, p, s) {
         case AST.SetRefExp:
                 var ans1 = valueOf(e.Exp1, p, s);
                 var ans2 = valueOf(e.Exp2, p, ans1.sto);
-                var addr = setref(ans1.val, ans2.val, ans2.sto);
+                var addr = STO.setRef(ans1.val, ans2.val, ans2.sto);
                 return {
                     "val": "42",
                     "sto": addr
