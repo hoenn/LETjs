@@ -1,5 +1,6 @@
 var INTERP = require("./Interp.js");
 var ENV = require("./Environment.js");
+var STO = require("./Store.js");
 var util = require('util');
 var main = function(){
     //Create parser
@@ -8,9 +9,10 @@ var main = function(){
     var output = parser.parse(process.argv[2]);
     //Output
     var emptyEnv = new ENV.Env(null,null,null)
+    var emptySto = new STO.Store();
     var pgm = new AST.Pgm(output);
     console.log(util.inspect(pgm, true, null, true));
-    console.log(INTERP.valueOf(pgm, emptyEnv));
+    console.log(INTERP.valueOf(pgm, emptyEnv, emptySto));
 }
 
 
