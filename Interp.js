@@ -73,7 +73,7 @@ function valueOf (e, p, s) {
                 var rand = e.Exp2;
                 var procAns = valueOf(rator, p, s);
                 var argAns = valueOf(rand, p, procAns.sto);
-                return applyProcedure(proc, argAns.val, argAns.sto);
+                return applyProcedure(procAns.val, argAns.val, argAns.sto);
                 break;
         case AST.LetRecExp: 
                 var pname = e.Id1;
