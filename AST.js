@@ -46,6 +46,9 @@ function LetRecExp (id1, id2, exp1, exp2){
     this.Exp1 = exp1;
     this.Exp2 = exp2;
 }
+function BeginExp (expseq){
+    this.ExpSeq = expseq;
+}
 function NewRefExp(exp1){
     this.Exp1 = exp1;
 }
@@ -70,6 +73,7 @@ module.exports = {
     ProcExp: ProcExp,
     CallExp: CallExp,
     LetRecExp: LetRecExp,
+    BeginExp: BeginExp,
     NewRefExp: NewRefExp,
     DerefExp: DerefExp,
     SetRefExp: SetRefExp
