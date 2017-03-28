@@ -49,7 +49,7 @@ To recompile LET.js
 
 ## Backus Naur Form Grammar
 *Program*    :: *Expression*
-
+<div>
 *Expression* :: Number
 
       |      :: Id
@@ -80,7 +80,7 @@ To recompile LET.js
 
       |      :: "setref" "(" *Expression* "," *Expression* ")"
 
-
+</div>
 *ExprSeq* :: *Expression*
 
       |   :: *Expression* ";" *ExprSeq*
