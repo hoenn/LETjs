@@ -52,34 +52,34 @@ To recompile LET.js
 
 *Expression* :: Number
 
-             :: Id
+*Expression* :: Id
            
-             :: "zero?" "(" *Expression* ")"
+*Expression* :: "zero?" "(" *Expression* ")"
            
-             :: "-" "(" *Expression* "," *Expression* ")" 
+*Expression* :: "-" "(" *Expression* "," *Expression* ")" 
            
-             :: "+" "(" *Expression* "," *Expression* ")" 
+*Expression* :: "+" "(" *Expression* "," *Expression* ")" 
 
-             :: "*" "(" *Expression* "," *Expression* ")" 
+*Expression* :: "*" "(" *Expression* "," *Expression* ")" 
 
-             :: "let" Id "=" *Expression* "in" *Expression*
+*Expression* :: "let" Id "=" *Expression* "in" *Expression*
            
-             :: "if" *Expression* "then" *Expression* "else" *Expression*
+*Expression* :: "if" *Expression* "then" *Expression* "else" *Expression*
 
-             :: "proc" "(" Id ")" *Expression*
+*Expression* :: "proc" "(" Id ")" *Expression*
 
-             :: "(" *Expression* " " *Expression* ")"
+*Expression* :: "(" *Expression* " " *Expression* ")"
            
-             :: "letrec" Id "(" Id ")" "=" *Expression* "in" *Expression*
+*Expression* :: "letrec" Id "(" Id ")" "=" *Expression* "in" *Expression*
 
-             :: "begin" *ExprSeq* "end"
+*Expression* :: "begin" *ExprSeq* "end"
 
-             :: "newref" "(" *Expression* ")" 
+*Expression* :: "newref" "(" *Expression* ")" 
 
-             :: "deref" "(" *Expression* ")"
+*Expression* :: "deref" "(" *Expression* ")"
 
-             :: "setref" "(" *Expression* "," *Expression* ")"
+*Expression* :: "setref" "(" *Expression* "," *Expression* ")"
 
 *ExprSeq* :: *Expression*
 
-      |   :: *Expression* ";" *ExprSeq*
+*ExprSeq* :: *Expression* ";" *ExprSeq*
