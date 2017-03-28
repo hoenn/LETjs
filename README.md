@@ -71,3 +71,16 @@ To recompile LET.js
 *Expression* :: "(" *Expression* " " *Expression* ")"
            
 *Expression* :: "letrec" Id "(" Id ")" "=" *Expression* "in" *Expression*
+
+*Expression* :: "begin" *ExprSeq* "end"
+
+*Expression* :: "newref" "(" *Expression* ")" 
+
+*Expression* :: "deref" "(" *Expression* ")"
+
+*Expression* :: "setref" "(" *Expression* "," *Expression* ")"
+
+
+*ExprSeq* :: *Expression*
+
+*ExprSeq* :: *Expression* ";" *ExprSeq*
