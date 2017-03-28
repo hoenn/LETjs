@@ -20,7 +20,7 @@ var main = function(){
 }
 
 
-var STO = require("../Store.js");
+var STO = require("../src/Store.js");
 if(require.main === module) {
     main();
 }

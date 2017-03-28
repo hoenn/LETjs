@@ -58,10 +58,10 @@ var tests = [{
 }
 ]
 
-var AST = require("../AST.js");
-var INTERP = require("../Interp.js");
-var emptyEnv = require("../Environment.js").emptyEnv();
-const parser = require("../LET.js").parser;
+var AST = require("../src/AST.js");
+var INTERP = require("../src/Interp.js");
+var emptyEnv = require("../src/Environment.js").emptyEnv();
+const parser = require("../grammar/LET.js").parser;
 
 function testInput(x){
     var pgm = new AST.Pgm(parser.parse(x.input));

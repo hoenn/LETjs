@@ -22,7 +22,7 @@ var main = function(){
     }
 }
 
-var VAL = require("../Val.js");
+var VAL = require("../src/Val.js");
 if(require.main === module) {
     main();
 }
