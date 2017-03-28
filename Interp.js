@@ -84,6 +84,29 @@ function valueOf (e, p, s) {
                 var pp = ENV.extendEnv(p, pname, wrappedProc);
                 return valueOf(body, pp, s);
                 break;
+        case AST.BeginExp:
+                var es = e.ExpSeq;
+                if (es.length > 0){
+                    head = es[0];
+                    headAns = valueOf(head, p, s);
+                    //If there is only one item left
+                    if(es.length == 1){
+                        return {
+                            "val": headAns.val,
+                            "sto": headAns.sto
+                        }
+                            
+                    } else { //Evaluate the rest
+                        return valueOf(new AST.BeginExp(es.slice(1)), p, headAns.sto)
+                    } 
+
+                } else {
+                    //Shouldn't happen
+                    //Need to improve error handling..
+                    console.log(es.length);
+                    console.log("Undefined**");
+                }
+                break;
         case AST.NewRefExp:
                 var ans = valueOf(e.Exp1, p, s);
                 var ref = STO.newRef(ans.val, ans.sto);
@@ -127,3 +150,4 @@ ENV = require("./Environment.js");
 VAL = require("./Val.js");
 PROC = require("./Closure.js");
 STO = require("./Store.js");
+util = require("util");
