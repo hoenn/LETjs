@@ -48,8 +48,10 @@ To recompile LET.js
 ```$ jison LET.jison LET.jisonlex``` 
 
 ## Backus Naur Form Grammar
+### Program
 *Program*    :: *Expression*
 
+### Expression
 *Expression* :: Number
 
 *Expression* :: Id
@@ -80,6 +82,7 @@ To recompile LET.js
 
 *Expression* :: "setref" "(" *Expression* "," *Expression* ")"
 
+### Expression Sequence
 *ExprSeq* :: *Expression*
 
 *ExprSeq* :: *Expression* ";" *ExprSeq*
