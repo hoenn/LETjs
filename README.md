@@ -49,38 +49,37 @@ To recompile LET.js
 
 ## Backus Naur Form Grammar
 *Program*    :: *Expression*
-<div>
+
 *Expression* :: Number
 
-      |      :: Id
+             :: Id
            
-      |      :: "zero?" "(" *Expression* ")"
+             :: "zero?" "(" *Expression* ")"
            
-      |      :: "-" "(" *Expression* "," *Expression* ")" 
+             :: "-" "(" *Expression* "," *Expression* ")" 
            
-      |      :: "+" "(" *Expression* "," *Expression* ")" 
+             :: "+" "(" *Expression* "," *Expression* ")" 
 
-      |      :: "*" "(" *Expression* "," *Expression* ")" 
+             :: "*" "(" *Expression* "," *Expression* ")" 
 
-      |      :: "let" Id "=" *Expression* "in" *Expression*
+             :: "let" Id "=" *Expression* "in" *Expression*
            
-      |      :: "if" *Expression* "then" *Expression* "else" *Expression*
+             :: "if" *Expression* "then" *Expression* "else" *Expression*
 
-      |      :: "proc" "(" Id ")" *Expression*
+             :: "proc" "(" Id ")" *Expression*
 
-      |      :: "(" *Expression* " " *Expression* ")"
+             :: "(" *Expression* " " *Expression* ")"
            
-      |      :: "letrec" Id "(" Id ")" "=" *Expression* "in" *Expression*
+             :: "letrec" Id "(" Id ")" "=" *Expression* "in" *Expression*
 
-      |      :: "begin" *ExprSeq* "end"
+             :: "begin" *ExprSeq* "end"
 
-      |      :: "newref" "(" *Expression* ")" 
+             :: "newref" "(" *Expression* ")" 
 
-      |      :: "deref" "(" *Expression* ")"
+             :: "deref" "(" *Expression* ")"
 
-      |      :: "setref" "(" *Expression* "," *Expression* ")"
+             :: "setref" "(" *Expression* "," *Expression* ")"
 
-</div>
 *ExprSeq* :: *Expression*
 
       |   :: *Expression* ";" *ExprSeq*
