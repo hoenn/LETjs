@@ -11,7 +11,15 @@ pgm
     : e PGM
         {$$ = new AST.Pgm($1);}
     ;
-    
+
+expseq 
+    : e
+       {$$ = [$1] }
+    | e SEMICOLON expseq
+       { var x = $3;
+         x.unshift($1);
+        $$ = x;}
+    ; 
 e
     : NUMBER
         {$$ = new AST.ConstExp(Number($1));}
@@ -35,6 +43,8 @@ e
         {$$ = new AST.CallExp($2, $3);}
     | LETREC ID LPAREN ID RPAREN ASSIGN e IN e
         {$$ = new AST.LetRecExp($2, $4, $7, $9);}
+    | BEGIN expseq END
+        {$$ = new AST.BeginExp($2);}
     | NEWREF LPAREN e RPAREN
         {$$ = new AST.NewRefExp($3);}
     | DEREF LPAREN e RPAREN
@@ -43,4 +53,5 @@ e
         {$$ = new AST.SetRefExp($3, $5);}
 
     ;
+
 

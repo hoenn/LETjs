@@ -15,6 +15,8 @@
 "="                   return 'ASSIGN'
 "zero?"               return 'ZERO'
 "proc"                return 'PROC'
+"begin"               return 'BEGIN'
+"end"                 return 'END'
 "newref"              return 'NEWREF'
 "setref"              return 'SETREF'
 "deref"               return 'DEREF'
@@ -25,6 +27,7 @@
 "("                   return 'LPAREN'
 ")"                   return 'RPAREN'
 ","                   return 'COMMA'
+";"                   return 'SEMICOLON'
 [a-zA-Z][a-zA-Z0-9\_\-\?\']*          return 'ID'
 <<EOF>>               return 'EOF'
 
