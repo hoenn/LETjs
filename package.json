@@ -2,6 +2,7 @@
   "name": "LETjs",
   "version": "1.0.0",
   "dependencies": {
-    "jison": "^0.4.17"
+    "jison": "^0.4.17",
+    "jquery": "^3.2.1"
   }
 }
