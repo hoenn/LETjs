@@ -49,7 +49,7 @@ var replEnv = require("./Environment.js").emptyEnv();
 var STO = require("./Store.js");
 var replSto = new STO.Store();
 var INTERP = require("./Interp.js");
-var parser = require("./LET.js").parser;
+var parser = require("../grammar/LET.js").parser;
 var showAST = false;
 var arg = process.argv[2];
 

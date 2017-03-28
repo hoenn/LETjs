@@ -4,7 +4,7 @@ var STO = require("./Store.js");
 var util = require('util');
 var main = function(){
     //Create parser
-    var parser = require("./LET.js").parser;
+    var parser = require("../grammar/LET.js").parser;
     //Parse argv[2] (User argument)
     var output = parser.parse(process.argv[2]);
     //Output
