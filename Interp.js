@@ -32,7 +32,7 @@ function valueOf (e, p, s) {
                         }
                 
                 break;
-        case AST.PlusExp: //TO DO 
+        case AST.PlusExp: 
                 var ans1 =valueOf(e.Exp1,p, s);
                 var ans2  =valueOf(e.Exp2, p, ans1.sto);
                 return {
@@ -40,10 +40,13 @@ function valueOf (e, p, s) {
                         "sto": ans2.sto
                        }
                 break;
-        case AST.TimesExp: //TO DO
-                var n1 =valueOf(e.Exp1,p);
-                var n2 =valueOf(e.Exp2, p);
-                return new VAL.NumVal(n1.val * n2.val);
+        case AST.TimesExp: 
+                var ans1 =valueOf(e.Exp1,p, s);
+                var ans2 =valueOf(e.Exp2, p, ans1.sto);
+                return {
+                        "val": new VAL.NumVal(n1.val * n2.val),
+                        "sto": ans2.sto
+                       }
                 break;
         case AST.LetExp:
                 var body = e.Exp2;
@@ -65,21 +68,21 @@ function valueOf (e, p, s) {
                     "sto": s
                     }
                 break;
-        case AST.CallExp: //TO DO 
+        case AST.CallExp: 
                 var rator = e.Exp1;
                 var rand = e.Exp2;
-                var proc = valueOf(rator, p);
-                var arg = valueOf(rand, p);
-                return applyProcedure(proc, arg);
+                var procAns = valueOf(rator, p, s);
+                var argAns = valueOf(rand, p, procAns.sto);
+                return applyProcedure(proc, argAns.val, argAns.sto);
                 break;
-        case AST.LetRecExp: //TO DO
+        case AST.LetRecExp: 
                 var pname = e.Id1;
                 var bvar = e.Id2;
                 var pbody = e.Exp1;
                 var body = e.Exp2;
                 var wrappedProc = new VAL.ProcVal(new PROC.RecProc(bvar,pbody));
                 var pp = ENV.extendEnv(p, pname, wrappedProc);
-                return valueOf(body, pp);
+                return valueOf(body, pp, s);
                 break;
         case AST.NewRefExp:
                 var ans = valueOf(e.Exp1, p, s);
