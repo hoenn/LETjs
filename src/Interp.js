@@ -9,7 +9,8 @@ function valueOf (e, p, s) {
                 break;
 
         case AST.VarExp:
-                return new Answer(ENV.applyEnv(p, e.Id), s);
+                var addr = ENV.applyEnv(p, e.Id);
+                return new Answer(STO.deref(addr, s), s);
                 break;
 
         case AST.IsZeroExp:
@@ -38,8 +39,9 @@ function valueOf (e, p, s) {
         case AST.LetExp:
                 var body = e.Exp2;
                 var ans = valueOf(e.Exp1, p, s);
-                var pp = ENV.extendEnv(p, e.Id, ans.val);
-                return valueOf(body, pp, ans.sto);
+                var ref = STO.newRef(ans.val, ans.sto);
+                var pp = ENV.extendEnv(p, e.Id, ref.addr);
+                return valueOf(body, pp, ref.sto);
                 break;
 
         case AST.IfExp: 
@@ -68,9 +70,16 @@ function valueOf (e, p, s) {
                 var bvar = e.Id2;
                 var pbody = e.Exp1;
                 var body = e.Exp2;
+
+                //Reserve a place in the store
+                var ref = newref(null, s);
+                //Wrap the LetRec in a Proc
                 var wrappedProc = new VAL.ProcVal(new PROC.RecProc(bvar,pbody));
-                var pp = ENV.extendEnv(p, pname, wrappedProc);
-                return valueOf(body, pp, s);
+                //Extend the environment with ref to place in the store
+                var pp = ENV.extendEnv(p, pname, ref.addr);
+                //Store wrapped proc in the reserved place
+                var s2 = setRef(ref.addr, wrappedProc, ref.sto);
+                return valueOf(body, pp, s2);
                 break;
 
         case AST.BeginExp:
@@ -90,27 +99,11 @@ function valueOf (e, p, s) {
                     console.log("Undefined Behavior");
                 }
                 break;
-
-        case AST.NewRefExp:
-                var ans = valueOf(e.Exp1, p, s);
-                var ref = STO.newRef(ans.val, ans.sto);
-                return new Answer(new VAL.RefVal(ref.addr), ref.sto);
-                break;
-
-
-        case AST.DerefExp:
-                var ans = valueOf(e.Exp1, p, s);
-                var addr = ans.val.val;
-                var value = STO.deref(addr, ans.sto);
-                return new Answer(value, ans.sto);
-                break;
-
-        case AST.SetRefExp:
-                var ans1 = valueOf(e.Exp1, p, s);
-                var ans2 = valueOf(e.Exp2, p, ans1.sto);
-                var oldVal = STO.deref(ans1.val.val, s);
-                var addr = STO.setRef(ans1.val.val, ans2.val, ans2.sto);
-                return new Answer(oldVal, addr);
+        case AST.AssignExp:
+                var ans = valueOf(e.Exp, p , s);
+                var oldVal = STO.deref(ENV.applyEnv(p, e.Id), s);
+                var s2 = STO.setRef( (ENV.applyEnv(p, e.Id)), ans.val, ans.sto);
+                return new Answer(oldVal , s2);
                 break;
 
     }

@@ -45,8 +45,8 @@ e
         {$$ = new AST.LetRecExp($2, $4, $7, $9);}
     | BEGIN expseq END
         {$$ = new AST.BeginExp($2);}
-    | SET ID ASSIGN e
-        {$$ = new AST.ASsignExp($2, $4);}
+    | SET LPAREN ID COMMA e RPAREN
+        {$$ = new AST.AssignExp($3, $5);}
 
     ;
 
