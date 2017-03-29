@@ -13,6 +13,7 @@ window.parse = function(){
     var emptySto = new STO.Store();
     var output = parser.parse(input);
     var pgm = new AST.Pgm(output);
+    $("#ast").text(util.inspect(pgm));
     $("#output").text(util.inspect(INTERP.valueOf(pgm, emptyEnv, emptySto)));
 }
 
