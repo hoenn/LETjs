@@ -76,11 +76,7 @@ To recompile LET.js
 
 *Expression* :: "begin" *ExprSeq* "end"
 
-*Expression* :: "newref" "(" *Expression* ")" 
-
-*Expression* :: "deref" "(" *Expression* ")"
-
-*Expression* :: "setref" "(" *Expression* "," *Expression* ")"
+*Expression* :: "set" "(" Id "," *Expression* ")"
 
 ### Expression Sequence
 *ExprSeq* :: *Expression*
