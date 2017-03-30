@@ -21,7 +21,7 @@ function valueOf (e, p, s) {
         case AST.DiffExp: 
                 var ans1 =valueOf(e.Exp1,p, s);
                 var ans2 =valueOf(e.Exp2, p, ans1.sto);
-                return new Answer(new VAL.NumVal(ans1.val.val - ans2.val.val));
+                return new Answer(new VAL.NumVal(ans1.val.val - ans2.val.val), ans2.sto);
                 break;
 
         case AST.PlusExp: 
@@ -86,7 +86,7 @@ function valueOf (e, p, s) {
                 var es = e.ExpSeq;
                 if (es.length > 0){
                     head = es[0];
-                    headAns = valueOf(head, p, s);
+                    var headAns = valueOf(head, p, s);
                     //If there is only one item left
                     if(es.length == 1){
                         return new Answer(headAns.val, headAns.sto);
@@ -101,6 +101,7 @@ function valueOf (e, p, s) {
                 break;
         case AST.AssignExp:
                 var ans = valueOf(e.Exp, p , s);
+                console.log(ans.sto);
                 var oldVal = STO.deref(ENV.applyEnv(p, e.Id), s);
                 var s2 = STO.setRef( (ENV.applyEnv(p, e.Id)), ans.val, ans.sto);
                 return new Answer(oldVal , s2);
@@ -108,11 +109,11 @@ function valueOf (e, p, s) {
 
     }
 }
-function applyProcedure(proc, arg, s){
+function applyProcedure(proc, arg, sto){
     var param = proc.val.Param;
     var body = proc.val.Exp;
     var savedEnv = proc.val.Env;
-    var ref = STO.newRef(arg, s);
+    var ref = STO.newRef(arg, sto);
     var newEnv = ENV.extendEnv(savedEnv, param, ref.addr);
     return valueOf(body, newEnv, ref.sto);
 }
