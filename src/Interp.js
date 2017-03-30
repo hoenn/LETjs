@@ -101,7 +101,6 @@ function valueOf (e, p, s) {
                 break;
         case AST.AssignExp:
                 var ans = valueOf(e.Exp, p , s);
-                console.log(ans.sto);
                 var oldVal = STO.deref(ENV.applyEnv(p, e.Id), s);
                 var s2 = STO.setRef( (ENV.applyEnv(p, e.Id)), ans.val, ans.sto);
                 return new Answer(oldVal , s2);
