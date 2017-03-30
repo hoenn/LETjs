@@ -108,11 +108,13 @@ function valueOf (e, p, s) {
 
     }
 }
-function applyProcedure(proc, arg){
+function applyProcedure(proc, arg, s){
     var param = proc.val.Param;
     var body = proc.val.Exp;
     var savedEnv = proc.val.Env;
-    return valueOf(body, (ENV.extendEnv(savedEnv, param, arg)));
+    var ref = STO.newRef(arg, s);
+    var newEnv = ENV.extendEnv(savedEnv, param, ref.addr);
+    return valueOf(body, newEnv, ref.sto);
 }
 
 function Answer(v, s){
