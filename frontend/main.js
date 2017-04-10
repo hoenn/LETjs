@@ -1,5 +1,5 @@
 
-var $ = require('jQuery');
+var $ = require('jquery');
 var util = require('util');
 var INTERP = require("../src/Interp.js");
 var ENV = require("../src/Environment.js");
