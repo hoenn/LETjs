@@ -41,11 +41,15 @@ To see the Abstract Syntax Tree of your programs the REPL can be launched with  
 
 
 ## Recompilation
-The LET.jison and LET.jisonlex files are the backbone of the language. If modified they must be recompiled with Jison to generate a new LET.js file.
+The LET.jison and LET.jisonlex files are the backbone of the language. If modified they must be recompiled with Jison to generate a new LET.js file. The HTML frontend must also be recompiled if the main.js file is modified. Add [jison](https://github.com/zaach/jison) and [browserify](browserify.org) to your global node command line tools 
+
+```$ npm install -g jison ```
+
+```$ npm install -g browserify ```
 
 To recompile LET.js
 
-```$ jison LET.jison LET.jisonlex``` 
+```$ ./build.sh ``` 
 
 ## Backus Naur Form Grammar
 ### Program
