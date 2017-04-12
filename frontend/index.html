@@ -1,8 +1,84 @@
+<!doctype html>
 <html>
-    <script src = "./bundle.js"></script>
+	<head>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<h1>LETjs</h1>
+				<p>LET is a programming language originally described in Scheme by Daniel P. Friedman and Mitchell Wand in
+					<a href ="https://mitpress.mit.edu/books/essentials-programming-languages">Exploration of Programming Languages.</a></p>
+				<p>This is an implementation of LET created in JavaScript using <a href ="https://github.com/zaach/jison">jison</a> to generate the parser.</p>
+				<p>The LET language is a toy language with a very basic grammar. A program consists of a single expression which may be made up of multiple expressions itself</p>
+			</div>
+		</div>
+
+	<ul class="nav nav-tabs side-buffer">
+		<li class="active"><a data-toggle="tab" href="#editor">Editor</a></li>
+		<li><a data-toggle="tab" href="#examples">Examples</a></li>
+	</ul>
+
+	<div class="tab-content side-buffer">
+		<div id="editor" class="tab-pane fade in active">
+		<h3>Editor</h3>
+		<div class= "container">
+			<div class ="row">
+					<div class="form-group">
+						<label for="input">Input:</label>
+						<textarea class="form-control" id="user"></textarea>
+					</div>
+			</div>
+
+			<div class ="row bottom-buffer">
+				<button type="button" onclick ="parse()" class="btn btn-primary btn-md">Run</button>
+			</div>
+
+			<div class ="row">
+				<div class="form-group">
+					<label for="output">Output:</label>
+					<!--<input id = "output" class="form-control" id="output">--><div id = "output"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div id="examples" class="tab-pane fade">
+      <h3>Examples</h3>
+    </div>
+
+
+
+
+
+
+
+		<script src = "./bundle.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</body>
+
+
+
+
+
+
+
+
+
+	<!--<script src = "./bundle.js"></script>
     <head>Hello World</head>
     <input id ="user" text="LET">
     <button onclick ="parse()">Run</button>
-    <div id = "output"></div>
-    <div id = "ast"></div>
+    <div id = "output"></div>-->
 </html>
