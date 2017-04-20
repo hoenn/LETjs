@@ -50,10 +50,13 @@
 	</div>
 
     <div id="examples" class="tab-pane fade">
-      <h3>Examples</h3>
+      <h3>Examples of Valid LET Programs</h3>
+			<div class="well">let x = 5 in x <br>Result: 5</div>
+
+			<div class="well">let x = 3 in let y = 2 in -(x,y) <br>Result: 1</div>
+
+			<div class="well">let x = 3 in let y = 3 in if zero?(-(x,y)) then 1 else 0 <br>Result: 1</div>
     </div>
-
-
 
 
 
@@ -67,14 +70,6 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	</body>
-
-
-
-
-
-
-
-
 
 	<!--<script src = "./bundle.js"></script>
     <head>Hello World</head>
