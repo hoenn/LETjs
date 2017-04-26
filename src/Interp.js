@@ -130,4 +130,3 @@ ENV = require("./Environment.js");
 VAL = require("./Val.js");
 PROC = require("./Closure.js");
 STO = require("./Store.js");
-util = require("util");
