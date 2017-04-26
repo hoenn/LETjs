@@ -38,7 +38,7 @@ To see the Abstract Syntax Tree of your programs the REPL can be launched with  
 
 ```$ node Repl.js AST```
 
-To disable (colors)[https://github.com/marak/colors.js]
+To disable [colors](https://github.com/marak/colors.js)
 
 ```$ node Repl.js AST --no-color```
 
