@@ -51,9 +51,16 @@ The LET.jison and LET.jisonlex files are the backbone of the language. If modifi
 
 ```$ npm install -g browserify ```
 
-To recompile LET.js
+To recompile LET.js and bundle.js on bash
 
 ```$ ./build.sh ``` 
+
+This script simply runs the follow commands
+
+```$ jison grammar/LET.jison grammar/LET.jisonlex -o grammar/LET.js```
+
+```$ browserify frontend/main.js -o frontend/bundle.js```
+
 
 ## Backus Naur Form Grammar
 ### Program
