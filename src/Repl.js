@@ -5,7 +5,8 @@ var main = function(){
     const repl = require('readline').createInterface({
         prompt: "LET> ",
         input: process.stdin,
-        output: process.stdout
+        output: process.stdout,
+        useColors: true
     });
     
     repl.prompt();
@@ -18,12 +19,13 @@ var main = function(){
         try {
             var pgm = new AST.Pgm(parser.parse(line));
             if(showAST)
-                console.log(pgm);
-            console.log(INTERP.valueOf(pgm, replEnv, replSto));
+                console.log(util.inspect(pgm).green);
+            var result = INTERP.valueOf(pgm, replEnv, replSto)
+            console.log(result.show().blue);
         } 
         catch(e){
             console.log(e);
-            console.log("Invalid Syntax");
+            console.log("Invalid Syntax".yellow);
         }
         finally{
             repl.prompt();
@@ -31,7 +33,7 @@ var main = function(){
     });
 
     repl.on('close', ()=> {
-        console.log("Exiting...");
+        console.log("Exiting...".red);
         process.exit(0);
     });
 }
@@ -52,6 +54,8 @@ var INTERP = require("./Interp.js");
 var parser = require("../grammar/LET.js").parser;
 var showAST = false;
 var arg = process.argv[2];
+var util = require('util')
+var colors = require('colors')
 
 if(require.main === module) {
     main();

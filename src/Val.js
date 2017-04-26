@@ -14,7 +14,7 @@ var NumVal = function(val){
 NumVal.prototype = Object.create(ExpVal.prototype);
 NumVal.prototype.constructor= NumVal;
 NumVal.prototype.show = function NumValShow(){
-    return this.val;
+    return "NumVal: "+this.val;
 }
 
 var BoolVal = function(bool){
@@ -26,7 +26,7 @@ var BoolVal = function(bool){
 BoolVal.prototype = Object.create(ExpVal.prototype);
 BoolVal.prototype.constructor = BoolVal;
 BoolVal.prototype.show = function BoolValShow(){
-    return this.val;
+    return "BoolVal: "+this.val;
 }
 
 var ProcVal = function(proc){
@@ -35,7 +35,7 @@ var ProcVal = function(proc){
 ProcVal.prototype = Object.create(ExpVal.prototype);
 ProcVal.prototype.constructor = ProcVal;
 ProcVal.prototype.show = function ProcValShow(){
-    return this.val;
+    return "ProcVal: "+this.val;
 }
 
 
