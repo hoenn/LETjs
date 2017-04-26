@@ -11,8 +11,6 @@ var main = function(){
     repl.prompt();
 
     repl.on('line', (line) => {
-        //Clear store
-        replSto = new STO.Store();
         //If input matches a quit value
         if(quitValues.indexOf(line) != -1){
             repl.close();
@@ -45,9 +43,11 @@ var quitValues = [
 ];
 
 var AST = require("./AST.js");
-var replEnv = require("./Environment.js").emptyEnv();
 var STO = require("./Store.js");
-var replSto;
+var PRELUDE = require("./Prelude.js")
+var replSto = new STO.Store()
+var replEnv = require("./Environment.js").emptyEnv();
+replEnv = PRELUDE.loadInitEnv(replEnv, replSto)
 var INTERP = require("./Interp.js");
 var parser = require("../grammar/LET.js").parser;
 var showAST = false;
