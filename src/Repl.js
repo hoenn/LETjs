@@ -19,7 +19,7 @@ var main = function(){
         try {
             var pgm = new AST.Pgm(parser.parse(line));
             if(showAST)
-                console.log(util.inspect(pgm).green);
+                console.log(util.inspect(pgm, {depth: null}).green);
             var result = INTERP.valueOf(pgm, replEnv, replSto)
             console.log(result.show().blue);
         } 
