@@ -14,8 +14,39 @@ window.parse = function(){
     var emptySto = new STO.Store();
     var output = parser.parse(input);
     var pgm = new AST.Pgm(output);
-    $("#ast").text(util.inspect(pgm));
+    var cAst = cleanAst(pgm);
+    console.log(util.inspect(pgm, {depth:null}));
+    cAst["name"] = "Program"
+    $("#ast").text(util.inspect(cAst, { depth:null}));
     $("#output").text(util.inspect(INTERP.valueOf(pgm, emptyEnv, emptySto)));
+}
+
+function cleanAst(ast){
+  var newAst = {};
+  newAst.name = ast.name
+  newAst.children = []
+  //If there are children
+  
+  for(node in ast){
+    if(isLeaf(ast[node])){
+      console.log(ast[node])
+      newAst.children.push(ast[node])
+    }
+    else if(node.startsWith("E")){
+      newAst.children.push(cleanAst(ast[node]));
+    }
+    else if(node.startsWith("I")){
+      newAst.children.push({"name": node, "Value": ast[node]})
+    }
+  }
+    
+  
+  return newAst;
+}
+function isLeaf(node){
+  //A node is a leaf if
+  //It is a const or var exp
+  return node.name == "ConstantExpr" || node.name == "VariableExpr"
 }
 
 
@@ -10978,57 +11009,71 @@ return jQuery;
 
 },{}],4:[function(require,module,exports){
 function Pgm(exp){
+    this.name = "Program";
     this.Exp = exp;
 }
 function ConstExp(i)  {
+    this.name = "ConstantExpr";
     this.Int = i;
 }
 function VarExp(id) {
+    this.name = "VariableExpr";
     this.Id  = id;
 }
 function IsZeroExp (exp) {
+    this.name = "IsZeroExpr";
     this.Exp = exp;
 }
 function DiffExp (exp1, exp2) {
+    this.name = "DifferenceExpr";
     this.Exp1 = exp1;
     this.Exp2 = exp2;
 }
 function PlusExp (exp1, exp2) {
+    this.name = "PlusExpr";
     this.Exp1 = exp1;
     this.Exp2 = exp2;
 }
 function TimesExp (exp1, exp2) {
+    this.name = "TimesExpr";
     this.Exp1 = exp1;
     this.Exp2 = exp2;
 }
 function IfExp (cond, cons, alt)  {
+    this.name = "IfThenElseExpr";
     this.Exp1 = cond; //Condition
     this.Exp2 = cons; //Consequent
     this.Exp3 = alt;  //Alternative
 }
 function LetExp (id, val, inExp) {
+    this.name = "LetExpr";
     this.Id = id;
     this.Exp1 = val
     this.Exp2 = inExp
 }
 function ProcExp (id, exp){
+    this.name = "ProcedureExpr";
     this.Param = id;
     this.Exp = exp;
 }
 function CallExp (exp1, exp2){
+    this.name = "CallExpr";
     this.Exp1 = exp1;
     this.Exp2 = exp2;
 }
 function LetRecExp (id1, id2, exp1, exp2){
+    this.name = "RecursiveProcedureExpr";
     this.Id1 = id1;
     this.Id2 = id2;
     this.Exp1 = exp1;
     this.Exp2 = exp2;
 }
 function BeginExp (expseq){
+    this.name = "BeginExpr";
     this.ExpSeq = expseq;
 }
 function AssignExp (id, exp){
+    this.name = "AssignExpr";
     this.Id = id;
     this.Exp = exp;
 }

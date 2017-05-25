@@ -13,7 +13,38 @@ window.parse = function(){
     var emptySto = new STO.Store();
     var output = parser.parse(input);
     var pgm = new AST.Pgm(output);
-    $("#ast").text(util.inspect(pgm));
+    var cAst = cleanAst(pgm);
+    console.log(util.inspect(pgm, {depth:null}));
+    cAst["name"] = "Program"
+    $("#ast").text(util.inspect(cAst, { depth:null}));
     $("#output").text(util.inspect(INTERP.valueOf(pgm, emptyEnv, emptySto)));
+}
+
+function cleanAst(ast){
+  var newAst = {};
+  newAst.name = ast.name
+  newAst.children = []
+  //If there are children
+  
+  for(node in ast){
+    if(isLeaf(ast[node])){
+      console.log(ast[node])
+      newAst.children.push(ast[node])
+    }
+    else if(node.startsWith("E")){
+      newAst.children.push(cleanAst(ast[node]));
+    }
+    else if(node.startsWith("I")){
+      newAst.children.push({"name": node, "Value": ast[node]})
+    }
+  }
+    
+  
+  return newAst;
+}
+function isLeaf(node){
+  //A node is a leaf if
+  //It is a const or var exp
+  return node.name == "ConstantExpr" || node.name == "VariableExpr"
 }
 
