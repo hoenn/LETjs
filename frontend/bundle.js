@@ -37,7 +37,6 @@ function cleanAst(ast){
     if(isLeaf(ast[node])){
       var newNode = {"text": ast[node]};
       if(ast[node].hasOwnProperty("Int")){
-        console.log("ding")
         newNode.children = [{"text": {"name": ast[node]["Int"]}}]
       }
       else if (ast[node].hasOwnProperty("Id")){
@@ -50,7 +49,7 @@ function cleanAst(ast){
       newAst.children.push(cleanAst(ast[node]));
     }
     else if(node.startsWith("I")){
-      newAst.children.push({"text": {"name": node+" "+ast[node], "Value": ast[node]}})
+      newAst.children.push({"text": {"name": node+": "+ast[node], "Value": ast[node]}})
     }
   }
     
