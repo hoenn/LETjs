@@ -1,5 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
 var $ = require('jquery');
 var util = require('util');
 var INTERP = require("../src/Interp.js");
@@ -16,27 +15,42 @@ window.parse = function(){
     var pgm = new AST.Pgm(output);
     var cAst = cleanAst(pgm);
     console.log(util.inspect(pgm, {depth:null}));
-    cAst["name"] = "Program"
+    cAst["text"] = {"name": "Program"}
+    console.log(util.inspect(cAst, {depth:null}));
     $("#ast").text(util.inspect(cAst, { depth:null}));
     $("#output").text(util.inspect(INTERP.valueOf(pgm, emptyEnv, emptySto)));
+    var simple_chart_config = {
+      chart: {
+        container: "#tree-simple"
+      },
+    nodeStructure: cAst
+    }
+    var myChart = new Treant(simple_chart_config);
 }
 
 function cleanAst(ast){
   var newAst = {};
-  newAst.name = ast.name
+  newAst.text = {"name": ast.name}
   newAst.children = []
-  //If there are children
   
   for(node in ast){
     if(isLeaf(ast[node])){
-      console.log(ast[node])
-      newAst.children.push(ast[node])
+      var newNode = {"text": ast[node]};
+      if(ast[node].hasOwnProperty("Int")){
+        console.log("ding")
+        newNode.children = [{"text": {"name": ast[node]["Int"]}}]
+      }
+      else if (ast[node].hasOwnProperty("Id")){
+        newNode.children = [{"text": {"name": ast[node]["Id"]}}]
+      }
+      newAst.children.push(newNode)
+
     }
     else if(node.startsWith("E")){
       newAst.children.push(cleanAst(ast[node]));
     }
     else if(node.startsWith("I")){
-      newAst.children.push({"name": node, "Value": ast[node]})
+      newAst.children.push({"text": {"name": node+" "+ast[node], "Value": ast[node]}})
     }
   }
     
