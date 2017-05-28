@@ -17,8 +17,8 @@ window.parse = function(){
     console.log(util.inspect(pgm, {depth:null}));
     cAst["text"] = {"name": "Program"}
     console.log(util.inspect(cAst, {depth:null}));
-    $("#ast").text(util.inspect(cAst, { depth:null}));
     $("#output").text(util.inspect(INTERP.valueOf(pgm, emptyEnv, emptySto)));
+
     var simple_chart_config = {
       chart: {
         container: "#tree-simple"
