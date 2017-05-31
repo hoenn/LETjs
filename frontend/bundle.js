@@ -13,26 +13,62 @@ window.parse = function(){
     var emptySto = new STO.Store();
     var output = parser.parse(input);
     var pgm = new AST.Pgm(output);
-    var cAst = cleanAst(pgm);
     console.log(util.inspect(pgm, {depth:null}));
+
+    var cAst = cleanAst(pgm);
+    //Setup first node, singleton operation
     cAst["text"] = {"name": "Program"}
     console.log(util.inspect(cAst, {depth:null}));
-    $("#output").text(util.inspect(INTERP.valueOf(pgm, emptyEnv, emptySto)));
 
+    $("#output").text(util.inspect(INTERP.valueOf(pgm, emptyEnv, emptySto)));
+    
+    //Treant Setup
     var simple_chart_config = {
       chart: {
-        container: "#tree-simple"
+        container: "#tree-simple",
       },
-    nodeStructure: cAst
+      nodeStructure: cAst
     }
-    var myChart = new Treant(simple_chart_config);
+    var myChart = new Treant(simple_chart_config, null, $);
 }
 
 function cleanAst(ast){
+  //Create clean "parallel" representation of AST node
   var newAst = {};
+  //Text property holds Treant req'd json obj with name property
   newAst.text = {"name": ast.name}
+  //Init Treant Req'd children property
   newAst.children = []
-  
+  //For each element of this current node
+  //Ex: LetExp
+  //All components become children, then if they were parents they must be cleaned as well
+  //Id   
+  //Exp1 will have children
+  //Exp2 will have children
+
+  for(subNode in ast){
+    if(subNode == 0){
+      return;
+    }
+    //Always create a newNode to represent each subnode
+    //If not a parent itself
+    //Then add to children and give it a child of it's value
+    if(isLeaf(subNode)){
+      var newNode = {"text": subNode};
+      //give it a child that contains it's value as a newNode
+      for(val in subNode){
+        newNode.children = [{"text": {"name": subNode+": "+ast[subNode]}}]
+      }
+      newAst.children.push(newNode);
+    }
+    else {
+      var newNode = cleanAst(ast[subNode]);
+      if(newNode != undefined)
+        newAst.children.push(newNode);
+    }
+
+  }
+  /*
   for(node in ast){
     if(isLeaf(ast[node])){
       var newNode = {"text": ast[node]};
@@ -51,15 +87,13 @@ function cleanAst(ast){
     else if(node.startsWith("I")){
       newAst.children.push({"text": {"name": node+": "+ast[node], "Value": ast[node]}})
     }
-  }
+  }*/
     
   
   return newAst;
 }
 function isLeaf(node){
-  //A node is a leaf if
-  //It is a const or var exp
-  return node.name == "ConstantExpr" || node.name == "VariableExpr"
+  return node == "Param" || node == "Id" || node == "Int" // || other things that don't have children 
 }
 
 
