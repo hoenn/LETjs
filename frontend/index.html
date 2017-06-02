@@ -26,6 +26,7 @@
 	<ul class="nav nav-tabs side-buffer">
 		<li class="active"><a data-toggle="tab" href="#editor">Editor</a></li>
 		<li><a data-toggle="tab" href="#examples">Examples</a></li>
+    <li><a data-toggle="tab" href="#ast">Abstract Syntax Tree </a></li>
 	</ul>
 
 	<div class="tab-content side-buffer">
@@ -50,12 +51,6 @@
 				</div>
 			</div>
 
-      <div class = "row">
-        <div class ="form-group">
-          <label for="ast">AST:</label>
-          <div id = "tree-simple" ></div>
-        </div>
-      </div>  
 		</div>
 	</div>
 
@@ -67,7 +62,11 @@
 
 			<div class="well">let x = 3 in let y = 3 in if zero?(-(x,y)) then 1 else 0 <br>Result: 1</div>
     </div>
-
+    
+    <div id ="ast" class="fade">
+      <h3>Abstract Syntax Tree</h3>
+      <div class = "well" id = "tree-simple"></div>
+    </div>
 
 
 
