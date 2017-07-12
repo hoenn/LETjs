@@ -26,7 +26,6 @@
 	<ul class="nav nav-tabs side-buffer">
 		<li class="active"><a data-toggle="tab" href="#editor">Editor</a></li>
 		<li><a data-toggle="tab" href="#examples">Examples</a></li>
-    <li><a data-toggle="tab" href="#ast">Abstract Syntax Tree </a></li>
 	</ul>
 
 	<div class="tab-content side-buffer">
@@ -46,10 +45,14 @@
 
 			<div class ="row">
 				<div class="form-group">
-					<label for="output">Output:</label>
+					<label for="output">Result:</label>
 					<!--<input id = "output" class="form-control" id="output">--><div id = "output"></div>
 				</div>
 			</div>
+             <div id ="ast" >
+                  <h3>Abstract Syntax Tree</h3>
+              <div class = "well" id = "tree-simple"></div>
+        </div>
 
 		</div>
 	</div>
@@ -63,11 +66,7 @@
 			<div class="well">let x = 3 in let y = 3 in if zero?(-(x,y)) then 1 else 0 <br>Result: 1</div>
     </div>
     
-    <div id ="ast" class="fade">
-      <h3>Abstract Syntax Tree</h3>
-      <div class = "well" id = "tree-simple"></div>
-    </div>
-
+   
 
 
 
@@ -79,9 +78,4 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	</body>
 
-	<!--<script src = "./bundle.js"></script>
-    <head>Hello World</head>
-    <input id ="user" text="LET">
-    <button onclick ="parse()">Run</button>
-    <div id = "output"></div>-->
 </html>

@@ -19,7 +19,7 @@ window.parse = function(){
     cAst["text"] = {"name": "Program"}
     console.log(util.inspect(cAst, {depth:null}));
 
-    $("#output").text(util.inspect(INTERP.valueOf(pgm, emptyEnv, emptySto)));
+    $("#output").text(INTERP.valueOf(pgm, emptyEnv, emptySto).val);
 
     //Treant Setup
     var simple_chart_config = {

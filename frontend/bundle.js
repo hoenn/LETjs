@@ -20,7 +20,7 @@ window.parse = function(){
     cAst["text"] = {"name": "Program"}
     console.log(util.inspect(cAst, {depth:null}));
 
-    $("#output").text(util.inspect(INTERP.valueOf(pgm, emptyEnv, emptySto)));
+    $("#output").text(INTERP.valueOf(pgm, emptyEnv, emptySto).val);
 
     //Treant Setup
     var simple_chart_config = {
@@ -58,11 +58,13 @@ function cleanAst(ast){
     //If not a parent itself
     //Then add to children and give it a child of it's value
     if(isLeaf(subNode)){
+      //Old
       //var newNode = {"text": {"name": subNode}};
       //give it a child that contains it's value as a newNode
       //for(val in subNode){
       //  newNode.children = [{"text": {"name": subNode+": "+ast[subNode]}}]
       //}
+      //New
       var newNode = {"text": {"name": subNode+": "+ast[subNode]}}
       newAst.children.push(newNode);
     }
