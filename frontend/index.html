@@ -1,27 +1,26 @@
 <!doctype html>
 <html>
-	<head>
+<head>
     <script src = "Treant/vendor/raphael.js"></script>
     <script src = "Treant/Treant.js"></script>
     <link rel ="stylesheet" href = "Treant/Treant.css" type "text/css"/>
-		<link rel="stylesheet" type="text/css" href="main.css">
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
 
-
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	</head>
-	<body>
-		<div class="container">
-			<div class="jumbotron">
-				<h1>LETjs</h1>
-				<p>LET is a programming language originally described in Scheme by Daniel P. Friedman and Mitchell Wand in
-					<a href ="https://mitpress.mit.edu/books/essentials-programming-languages">Exploration of Programming Languages.</a></p>
-				<p>This is an implementation of LET created in JavaScript using <a href ="https://github.com/zaach/jison">jison</a> to generate the parser.</p>
-				<p>The LET language is a toy language with a very basic grammar. A program consists of a single expression which may be made up of multiple expressions itself</p>
-			</div>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>LETjs</h1>
+			<p>LET is a programming language originally described in Scheme by Daniel P. Friedman and Mitchell Wand in
+				<a href ="https://mitpress.mit.edu/books/essentials-programming-languages">Exploration of Programming Languages.</a></p>
+			<p>This is an implementation of LET created in JavaScript using <a href ="https://github.com/zaach/jison">jison</a> to generate the parser.</p>
+			<p>The LET language is a toy language with a very basic grammar. A program consists of a single expression which may be made up of multiple expressions itself</p>
 		</div>
+	</div>
 
 	<ul class="nav nav-tabs side-buffer">
 		<li class="active"><a data-toggle="tab" href="#editor">Editor</a></li>
@@ -49,33 +48,24 @@
 					<!--<input id = "output" class="form-control" id="output">--><div id = "output"></div>
 				</div>
 			</div>
-             <div id ="ast" >
-                  <h3>Abstract Syntax Tree</h3>
-              <div class = "well" id = "tree-simple"></div>
-        </div>
-
+			<div id ="ast" >
+				<h3>Abstract Syntax Tree</h3>
+				<div class = "well" id = "tree-simple"></div>
+			</div>
 		</div>
 	</div>
 
-    <div id="examples" class="tab-pane fade">
-      <h3>Examples of Valid LET Programs</h3>
+	<div id="examples" class="tab-pane fade">
+		<h3>Examples of Valid LET Programs</h3>
 			<div class="well">let x = 5 in x <br>Result: 5</div>
-
 			<div class="well">let x = 3 in let y = 2 in -(x,y) <br>Result: 1</div>
-
 			<div class="well">let x = 3 in let y = 3 in if zero?(-(x,y)) then 1 else 0 <br>Result: 1</div>
     </div>
-    
-   
+	<script src = "./bundle.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-
-
-		<script src = "./bundle.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	</body>
-
 </html>
