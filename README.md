@@ -59,7 +59,7 @@ This script simply runs the follow commands
 
 ```$ jison grammar/LET.jison grammar/LET.jisonlex -o grammar/LET.js```
 
-```$ browserify frontend/main.js -o frontend/bundle.js```
+```$ browserify docs/main.js -o docs/bundle.js```
 
 
 ## Backus Naur Form Grammar
