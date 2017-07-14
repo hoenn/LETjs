@@ -66,6 +66,8 @@ function cleanAst(ast){
       //New
       var newNode = {"text": {"name": subNode+": "+ast[subNode]}}
       newAst.children.push(newNode);
+    } else if (isBeginExp(ast[subNode])) {
+      newAst.children.push(handleBeginExp(ast[subNode]));
     }
     else {
       var newNode = cleanAst(ast[subNode]);
@@ -98,7 +100,20 @@ function cleanAst(ast){
   
   return newAst;
 }
+function handleBeginExp(node) {
+    var newNode = {"text": {"name": node.name}}
+    newNode.children= [];
+    var nodeArray = node["ExpSeq"]
+    for (var i = 0; i < nodeArray.length; i++) {
+        newNode.children.push(cleanAst(nodeArray[i]));
+    }
+    return newNode
+}
 function isLeaf(node){
-  return node == "Param" || node == "Id" || node == "Int" // || other things that don't have children 
+  return node == "Param" || node == "Id" || node == "Int"; // || other things that don't have children 
+}
+//BeginExp is a special case where all children are at the same level
+function isBeginExp(node) {
+  return node.name == "BeginExpr";
 }
 

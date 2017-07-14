@@ -67,6 +67,8 @@ function cleanAst(ast){
       //New
       var newNode = {"text": {"name": subNode+": "+ast[subNode]}}
       newAst.children.push(newNode);
+    } else if (isBeginExp(ast[subNode])) {
+      newAst.children.push(handleBeginExp(ast[subNode]));
     }
     else {
       var newNode = cleanAst(ast[subNode]);
@@ -99,8 +101,21 @@ function cleanAst(ast){
   
   return newAst;
 }
+function handleBeginExp(node) {
+    var newNode = {"text": {"name": node.name}}
+    newNode.children= [];
+    var nodeArray = node["ExpSeq"]
+    for (var i = 0; i < nodeArray.length; i++) {
+        newNode.children.push(cleanAst(nodeArray[i]));
+    }
+    return newNode
+}
 function isLeaf(node){
-  return node == "Param" || node == "Id" || node == "Int" // || other things that don't have children 
+  return node == "Param" || node == "Id" || node == "Int"; // || other things that don't have children 
+}
+//BeginExp is a special case where all children are at the same level
+function isBeginExp(node) {
+  return node.name == "BeginExpr";
 }
 
 
@@ -11155,10 +11170,10 @@ function Proc(id, exp, env){
     this.Exp = exp;
     this.Env = env;
 }
-function RecProc(id, exp){
+function RecProc(id, exp, env){
     this.Param = id;
     this.Exp = exp;
-    //Environment is injected later
+    this.Env = env//Environment is injected later
 }
 
 module.exports = {
@@ -11234,7 +11249,7 @@ function valueOf (e, p, s) {
 
         case AST.IsZeroExp:
                 var answer = valueOf(e.Exp, p, s)
-                return new Answer(new VAL.BoolVal(answer.val == 0), answer.sto);
+                return new Answer(new VAL.BoolVal(answer.val.val == 0), answer.sto);
                 break;
 
         case AST.DiffExp: 
@@ -11252,7 +11267,7 @@ function valueOf (e, p, s) {
         case AST.TimesExp: 
                 var ans1 =valueOf(e.Exp1,p, s);
                 var ans2 =valueOf(e.Exp2, p, ans1.sto);
-                return new Answer(new VAL.NumVal(ans1.val.val*ans2.val.val, ans2.sto));
+                return new Answer(new VAL.NumVal(ans1.val.val*ans2.val.val), ans2.sto);
                 break;
 
         case AST.LetExp:
@@ -11291,13 +11306,13 @@ function valueOf (e, p, s) {
                 var body = e.Exp2;
 
                 //Reserve a place in the store
-                var ref = newRef(null, s);
-                //Wrap the LetRec in a Proc
-                var wrappedProc = new VAL.ProcVal(new PROC.RecProc(bvar,pbody));
+                var ref = STO.newRef(null, s);
                 //Extend the environment with ref to place in the store
                 var pp = ENV.extendEnv(p, pname, ref.addr);
+                //Wrap the LetRec in a Proc
+                var wrappedProc = new VAL.ProcVal(new PROC.Proc(bvar,pbody, pp));
                 //Store wrapped proc in the reserved place
-                var s2 = setRef(ref.addr, wrappedProc, ref.sto);
+                var s2 = STO.setRef(ref.addr, wrappedProc, ref.sto);
                 return valueOf(body, pp, s2);
                 break;
 
@@ -11309,7 +11324,6 @@ function valueOf (e, p, s) {
                     //If there is only one item left
                     if(es.length == 1){
                         return new Answer(headAns.val, headAns.sto);
-                            
                     } else { //Evaluate the rest
                         return valueOf(new AST.BeginExp(es.slice(1)), p, headAns.sto)
                     } 
