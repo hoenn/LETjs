@@ -72,7 +72,7 @@ function valueOf (e, p, s) {
                 var body = e.Exp2;
 
                 //Reserve a place in the store
-                var ref = newRef(null, s);
+                var ref = STO.newRef(null, s);
                 //Wrap the LetRec in a Proc
                 var wrappedProc = new VAL.ProcVal(new PROC.RecProc(bvar,pbody));
                 //Extend the environment with ref to place in the store
