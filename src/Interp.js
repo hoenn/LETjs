@@ -33,7 +33,7 @@ function valueOf (e, p, s) {
         case AST.TimesExp: 
                 var ans1 =valueOf(e.Exp1,p, s);
                 var ans2 =valueOf(e.Exp2, p, ans1.sto);
-                return new Answer(new VAL.NumVal(ans1.val.val*ans2.val.val, ans2.sto));
+                return new Answer(new VAL.NumVal(ans1.val.val*ans2.val.val), ans2.sto);
                 break;
 
         case AST.LetExp:
