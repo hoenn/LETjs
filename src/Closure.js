@@ -3,10 +3,10 @@ function Proc(id, exp, env){
     this.Exp = exp;
     this.Env = env;
 }
-function RecProc(id, exp){
+function RecProc(id, exp, env){
     this.Param = id;
     this.Exp = exp;
-    //Environment is injected later
+    this.Env = env//Environment is injected later
 }
 
 module.exports = {

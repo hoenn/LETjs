@@ -15,7 +15,7 @@ function valueOf (e, p, s) {
 
         case AST.IsZeroExp:
                 var answer = valueOf(e.Exp, p, s)
-                return new Answer(new VAL.BoolVal(answer.val == 0), answer.sto);
+                return new Answer(new VAL.BoolVal(answer.val.val == 0), answer.sto);
                 break;
 
         case AST.DiffExp: 
@@ -73,12 +73,12 @@ function valueOf (e, p, s) {
 
                 //Reserve a place in the store
                 var ref = STO.newRef(null, s);
-                //Wrap the LetRec in a Proc
-                var wrappedProc = new VAL.ProcVal(new PROC.RecProc(bvar,pbody));
                 //Extend the environment with ref to place in the store
                 var pp = ENV.extendEnv(p, pname, ref.addr);
+                //Wrap the LetRec in a Proc
+                var wrappedProc = new VAL.ProcVal(new PROC.Proc(bvar,pbody, pp));
                 //Store wrapped proc in the reserved place
-                var s2 = setRef(ref.addr, wrappedProc, ref.sto);
+                var s2 = STO.setRef(ref.addr, wrappedProc, ref.sto);
                 return valueOf(body, pp, s2);
                 break;
 
@@ -90,7 +90,6 @@ function valueOf (e, p, s) {
                     //If there is only one item left
                     if(es.length == 1){
                         return new Answer(headAns.val, headAns.sto);
-                            
                     } else { //Evaluate the rest
                         return valueOf(new AST.BeginExp(es.slice(1)), p, headAns.sto)
                     } 
