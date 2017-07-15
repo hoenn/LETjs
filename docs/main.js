@@ -7,7 +7,7 @@ var AST = require("../src/AST.js");
 var parser = require("../grammar/LET.js").parser;
 
 window.parse = function(){
-    var input = $("#user").val();
+    var input = $("#editor-input").val();
     var emptyEnv = ENV.emptyEnv();
     var emptySto = new STO.Store();
     var output = parser.parse(input);
@@ -77,3 +77,8 @@ function isBeginExp(node) {
   return node.name == "BeginExpr";
 }
 
+window.loadExample = function(id) {
+  var exampleText = $("#ex"+id).text()
+  $("#editor-input").val(exampleText)
+  //Switch to editor tab"
+}
